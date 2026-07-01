@@ -1,0 +1,382 @@
+/* =================================================================
+   Australian Collection of Duckweed Clones — shared stylesheet
+   A hand-coded static site. Every page links to this one file, so
+   colours, type and layout can be changed here in one place.
+
+   Palette theme: water + duckweed. Teal water, frond greens, a pale
+   water-mint background.
+
+   Contents
+     1.  Design tokens (colours, type, spacing)
+     2.  Base + links
+     3.  Layout wrappers
+     4.  Header: brand + primary nav + section sub-nav
+     5.  Page head / hero
+     6.  Prose, figures, dividers
+     7.  Link lists
+     8.  Placeholder ("under construction") notice
+     9.  Contact block
+     10. Footer
+     11. Reduced motion
+     12. Responsive
+   ================================================================= */
+
+
+/* ----------------------------------------------------------------
+   1. Design tokens
+   ---------------------------------------------------------------- */
+:root {
+  --water:      #0E7C86;   /* primary teal */
+  --water-deep: #0A5A62;   /* darker teal for hovers/headings */
+  --frond:      #4E9A51;   /* duckweed green */
+  --frond-deep: #3B7A3E;
+  --frond-lite: #9BD44E;   /* bright lily-pad accent (use sparingly) */
+
+  --surface:  #F1F7F5;     /* page background — pale water */
+  --panel:    #FFFFFF;     /* cards / header */
+  --band:     #E1EFEA;     /* section band */
+  --line:     #CFE3DC;     /* hairlines / borders */
+
+  --ink:      #0F2320;     /* body text */
+  --ink-soft: #45564F;     /* secondary text */
+
+  --wrap: 78rem;
+  --measure: 46rem;        /* comfortable reading width */
+
+  --radius: 10px;
+
+  --display: "Spectral", Georgia, "Times New Roman", serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+
+/* ----------------------------------------------------------------
+   2. Base + links
+   ---------------------------------------------------------------- */
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--display);
+  line-height: 1.18;
+  color: var(--water-deep);
+  font-weight: 600;
+}
+
+h2 { font-size: 1.55rem; margin: 2.4rem 0 0.6rem; }
+h3 { font-size: 1.2rem; margin: 1.6rem 0 0.4rem; color: var(--frond-deep); }
+
+p { margin: 0 0 1rem; max-width: var(--measure); }
+
+a { color: var(--water); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { color: var(--frond-deep); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+hr { border: 0; }
+
+
+/* ----------------------------------------------------------------
+   3. Layout wrappers
+   ---------------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+main.wrap { padding-block: 2.5rem 3.5rem; }
+
+
+/* ----------------------------------------------------------------
+   4. Header: brand + primary nav + section sub-nav
+   ---------------------------------------------------------------- */
+.site-header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand-row { padding-block: 1.1rem; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+}
+.brand:hover { color: inherit; }
+
+/* Site logo in the header */
+.brand-logo {
+  flex: none;
+  height: 3rem;
+  width: auto;
+  display: block;
+}
+
+.brand-name {
+  display: block;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.22rem;
+  color: var(--water-deep);
+  line-height: 1.15;
+}
+.brand-tag {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-top: 0.1rem;
+}
+
+/* Primary navigation */
+nav.primary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  padding-block: 0.7rem;
+  border-top: 1px solid var(--line);
+}
+nav.primary a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-weight: 500;
+  font-size: 0.98rem;
+  padding: 0.15rem 0;
+  border-bottom: 2px solid transparent;
+}
+nav.primary a:hover { color: var(--water-deep); }
+nav.primary a[aria-current="page"] {
+  color: var(--water-deep);
+  border-bottom-color: var(--frond-lite);
+}
+
+/* Section sub-navigation (Database / Resources / About) */
+/* subnav sits in a full-width band; the nav itself stays aligned to .wrap */
+.subnav-bar { background: var(--band); border-bottom: 1px solid var(--line); }
+nav.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.1rem;
+  padding-block: 0.6rem;
+  font-size: 0.9rem;
+}
+nav.subnav a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  padding: 0.1rem 0;
+  border-bottom: 2px solid transparent;
+}
+nav.subnav a:hover { color: var(--water-deep); }
+nav.subnav a[aria-current="page"] {
+  color: var(--water-deep);
+  font-weight: 600;
+  border-bottom-color: var(--frond);
+}
+
+
+/* ----------------------------------------------------------------
+   5. Page head / hero
+   ---------------------------------------------------------------- */
+.page-head { padding-block: 2.2rem 0.5rem; }
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--frond-deep);
+  margin: 0 0 0.4rem;
+  font-weight: 600;
+}
+.page-title {
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  margin: 0 0 0.5rem;
+}
+.standfirst {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+.hero { padding-block: 2.6rem 1rem; }
+.hero .lede { font-size: 1.15rem; color: var(--ink-soft); }
+
+
+/* ----------------------------------------------------------------
+   6. Prose, figures, dividers
+   ---------------------------------------------------------------- */
+figure {
+  margin: 1.6rem 0;
+  max-width: 44rem;
+}
+figure img {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+figcaption {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* Responsive video wrapper */
+.video {
+  position: relative;
+  max-width: 44rem;
+  aspect-ratio: 16 / 9;
+  margin: 1.6rem 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--band);
+}
+.video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video.portrait {
+  aspect-ratio: 9 / 16;   /* vertical YouTube Short */
+  max-width: 20rem;        /* keep it phone-width, not a giant column */
+}
+
+/* Embedded Google Form */
+.form-embed {
+  width: 100%;
+  max-width: 44rem;
+  height: 900px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin: 1.4rem 0;
+  background: var(--panel);
+}
+
+/* Divider: a little row of floating fronds */
+.divider {
+  border: 0;
+  height: 1.4rem;
+  margin: 2.4rem 0;
+  background-image:
+    radial-gradient(circle, var(--frond) 0 40%, transparent 42%),
+    radial-gradient(circle, var(--frond-lite) 0 40%, transparent 42%),
+    radial-gradient(circle, var(--water) 0 40%, transparent 42%);
+  background-size: 0.7rem 0.7rem, 0.7rem 0.7rem, 0.7rem 0.7rem;
+  background-position: left center, center center, right center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+
+
+/* ----------------------------------------------------------------
+   7. Link lists
+   ---------------------------------------------------------------- */
+.link-group {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  max-width: var(--measure);
+}
+.link-group li {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.link-group li:first-child { border-top: 1px solid var(--line); }
+
+
+/* ----------------------------------------------------------------
+   8. Placeholder ("under construction") notice
+   ---------------------------------------------------------------- */
+.placeholder {
+  max-width: var(--measure);
+  margin: 1.5rem 0;
+  padding: 1.1rem 1.25rem;
+  background: var(--band);
+  border: 1px dashed var(--frond);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+}
+.placeholder strong { color: var(--frond-deep); }
+
+
+/* ----------------------------------------------------------------
+   9. Contact block
+   ---------------------------------------------------------------- */
+.contact-block {
+  max-width: var(--measure);
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--band);
+}
+.contact-block address {
+  font-style: normal;
+  line-height: 1.8;
+}
+
+
+/* ----------------------------------------------------------------
+   10. Footer
+   ---------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+.site-footer .wrap { padding-block: 1.4rem; }
+.site-footer a { color: var(--water); }
+
+
+/* ----------------------------------------------------------------
+   11. Reduced motion
+   ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+
+/* ----------------------------------------------------------------
+   12. Responsive
+   ---------------------------------------------------------------- */
+@media (max-width: 40rem) {
+  body { font-size: 1rem; }
+  .brand-name { font-size: 1.08rem; }
+  .brand-tag { font-size: 0.78rem; }
+  nav.primary { gap: 0.3rem 1rem; }
+  .form-embed { height: 1100px; }
+}
+
+/* ----------------------------------------------------------------
+   13. Helper aliases (referenced in markup)
+   ---------------------------------------------------------------- */
+.wrap-wide { max-width: var(--wrap); }        /* header/footer align with content */
+.brand-text { display: flex; flex-direction: column; }
+
+/* ----------------------------------------------------------------
+   15. News entries
+   ---------------------------------------------------------------- */
+.news-entry {
+  max-width: var(--measure);
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.news-entry:first-of-type { border-top: 1px solid var(--line); }
+.news-date {
+  font-family: var(--display);
+  font-weight: 600;
+  color: var(--frond-deep);
+  margin: 0 0 0.3rem;
+}
